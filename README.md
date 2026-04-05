@@ -34,12 +34,12 @@ This project was developed in Windows Subsystem Linux (WSL) with Ubuntu 22.04 LT
 To set up the environment for FINN and Brevitas, you can follow the official documentation provided by Xilinx ([FINN Doc](https://finn-dev.readthedocs.io/en/latest/) and [Brevitas Doc](https://xilinx.github.io/brevitas/v0.12.1/)). 
 
 FINN requires to be operated within a Docker environment. This project built a docker engine from the following packages:
-- docker-ce-rootless-extras_26.1.4-1~ubuntu.22.04~jammy_amd64.deb 
-- docker-compose-plugin_2.27.1-1~ubuntu.22.04~jammy_amd64.deb 
-- docker-ce-cli_26.1.4-1~ubuntu.22.04~jammy_amd64.deb
-- docker-ce_26.1.4-1~ubuntu.22.04~jammy_amd64.deb
-- docker-buildx-plugin_0.14.1-1~ubuntu.22.04~jammy_amd64.deb
-- containerd.io_1.6.33-1_amd64.deb
+- `docker-ce-rootless-extras_26.1.4-1~ubuntu.22.04~jammy_amd64.deb `
+- `docker-compose-plugin_2.27.1-1~ubuntu.22.04~jammy_amd64.deb `
+- `docker-ce-cli_26.1.4-1~ubuntu.22.04~jammy_amd64.deb`
+- `docker-ce_26.1.4-1~ubuntu.22.04~jammy_amd64.deb`
+- `docker-buildx-plugin_0.14.1-1~ubuntu.22.04~jammy_amd64.deb`
+- `containerd.io_1.6.33-1_amd64.deb`
 
 The repository of FINN provides a ready-to-use shell script 
 ```bash
