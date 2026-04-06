@@ -60,3 +60,32 @@ to start a container and run the quick test example provided by FINN.
 FINN relies on Vitis HLS for parts of the hardware generation process, especially when generating HLS-based accelerator components. After HLS synthesis, the generated IPs are further integrated and implemented in Vivado. 
 
 For WSL users, FINN, Vivado, and Vitis HLS should be installed in the same system environment, such as WSL2 or a native Linux system. Cross-environment installation, for example placing FINN in WSL while keeping Vivado or Vitis HLS on the host system, may lead to tool invocation failures and cause the FINN workflow to behave unexpectedly. **Therefore, it is recommended to use a single and pure environment for this project.**
+
+## Deployment
+### Platform
+The hardware design and implementation of this project are based on the Xilinx Zynq7000 FPGA platform, with only Programmable Logic (PL) part being used. The FINN generated stitched IPs were officially verificated based on Pynq and Zynq series. **If you need to deploy on your customized platform, remember to make modification on the argument *fpga_part* in `build.py` before operating it**. You can run the command
+```bash
+get_parts
+```  
+in your Vivado Tcl console to get the list supported hardwares.
+
+### Hardware Setup (For WSL User Only)
+If you call the Vivado Hardware Manager in your WSL, you might it found no device on your localhost even you have plugged in. This is caused due to the isolation between the Linux Kernel and your host Windows Kernel. To solve this problem, you need to attach your target device to your WSL by using **USB/IP**, which packages your USB into the TCP, and makes the I/O communication by TCP/IP. **Make sure your WSL kernel is equipped with USB devices support**.
+
+First of all, install `usbipd` both on your host shell and WSL shell. Run the following command under the root mode
+```bash
+winget install --interactive --exact dorssel.usbipd-win #FOR WINDOWS
+sudo apt install usbipd #FOR LINUX
+```
+Then, you can run the following command in your host shell to list the devices connected to your host system
+```bash
+usbipd list
+```
+Make sure you have the correct device and remember its `BUSID`, for example *1-3*. After this, run these command to bind your device and attach it to the WSL.
+```bash
+usbipd bind -b 1-3 #BUSID OF YOUR DEVICE
+usbipd attach --wsl -b 1-3
+```
+Make sure the state of target device is *ATTACHED* in the device list. 
+
+After this, you can run the command `lsusb` in your WSL shell to check if the device has been successfully attached. If you can see the device listed, then you have successfully set up the hardware connection for Vivado Hardware Manager in your WSL environment.
